@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Auth;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class User extends Authenticatable
 {
@@ -21,7 +23,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'nik',
     ];
 
     /**
@@ -43,8 +44,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    public function desa()
+
+    public function role(): BelongsTo
     {
-        return $this->belongsTo(Desa::class, 'id_desa');
+        return $this->belongsTo(Role::class, 'role_id');
+    }
+
+    public function penduduk(): BelongsTo
+    {
+        return $this->belongsTo(Penduduk::class, 'penduduk_id');
+    }
+
+    public function namaRole()
+    {
+        if(Auth::check()){
+            return Auth::user()->role->nama_role;
+        }
     }
 }

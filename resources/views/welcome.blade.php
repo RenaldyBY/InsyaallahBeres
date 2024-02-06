@@ -136,5 +136,7 @@
                 </div>
             </div>
         </div>
+@include('template.script.alert')
+
     </body>
 </html>
