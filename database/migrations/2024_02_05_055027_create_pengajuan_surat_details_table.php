@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('pengajuan_surat_details', function (Blueprint $table) {
             $table->id();
-            $table->string('username')->unique();
-            $table->string('email')->unique()->nullable();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->string('no_surat');
+            $table->string('nama_kolom')->nullable();
+            $table->text('isi_kolom')->nullable();
             $table->timestamps();
+
+            $table->foreign('no_surat')->references('no_surat')->on('pengajuan_surats');
         });
     }
 
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('pengajuan_surat_details');
     }
 };
