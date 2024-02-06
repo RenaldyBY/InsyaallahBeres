@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Facades\Schema;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -23,22 +24,31 @@ class AuthServiceProvider extends ServiceProvider
     /**
      * Register any authentication / authorization services.
      */
-    public function boot(Request $req): void
+    public function boot(): void
     {
         $this->registerPolicies();
 
-        if(Auth::check()){
-            $roles = Role::all();
-    
-            foreach ($roles as $key => $value) {
-                $namaRole = $value['nama_role'];
-                Gate::define($namaRole, static function (User $user) use ($namaRole) {
-                    return $user->role->nama_role === $namaRole;
-                });
-            }
+        if (Schema::hasTable('roles')) {
+            // Tabel ada
+            $roles = Role::all(); 
+        } else {
+            // Tabel tidak ada
+            $roles = [
+                [
+                    'nama_role' => 'admin',
+                ],
+                [
+                    'nama_role' => 'user'
+                ]
+            ]; 
         }
 
-
+        foreach ($roles as $key => $value) {
+            $namaRole = $value['nama_role'];
+            Gate::define($namaRole, static function (User $user) use ($namaRole) {
+                return $user->role->nama_role === $namaRole;
+            });
+        }
         
     }
 }
