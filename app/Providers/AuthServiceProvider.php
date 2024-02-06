@@ -27,14 +27,17 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        $roles = Role::all();
-
-        foreach ($roles as $key => $value) {
-            $namaRole = $value['nama_role'];
-            Gate::define($namaRole, static function (User $user) use ($namaRole) {
-                return $user->role->nama_role === $namaRole;
-            });
+        if(Auth::check()){
+            $roles = Role::all();
+    
+            foreach ($roles as $key => $value) {
+                $namaRole = $value['nama_role'];
+                Gate::define($namaRole, static function (User $user) use ($namaRole) {
+                    return $user->role->nama_role === $namaRole;
+                });
+            }
         }
+
 
         
     }

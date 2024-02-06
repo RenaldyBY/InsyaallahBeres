@@ -10,6 +10,7 @@ use App\Http\Controllers\Penduduk\PengajuanSuratController;
 use App\Http\Controllers\Guest\SuratController;
 use App\Http\Controllers\Kades\PersetujuanSuratController;
 use App\Http\Controllers\Admin\PengaturanDesaController;
+use App\Http\Controllers\Admin\PengaturanSuratController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,6 +64,15 @@ Route::middleware('auth')->group(function () {
                 Route::controller(PengaturanDesaController::class)->group(function () {
                     Route::get('/desa', 'index')->name('desa.index');
                     Route::put('/desa/update/{desa}', 'update')->name('desa.update');
+                });
+                Route::controller(PengaturanSuratController::class)->group(function () {
+                    Route::get('/surat', 'index')->name('surat.index');
+                    Route::post('/surat/store', 'store')->name('surat.store');
+                    Route::get('/surat/{surat}/edit', 'edit')->name('surat.edit');
+                    Route::put('/surat/{surat}', 'update')->name('surat.update');
+                    Route::get('/surat/{surat}', 'show')->name('surat.show');
+                    Route::post('/surat/kolomSurat', 'storeKolom')->name('surat.kolom.store');
+                    Route::delete('/surat/kolomSurat/{id}', 'destroyKolom')->name('surat.kolom.destroy');
                 });
             });
         });

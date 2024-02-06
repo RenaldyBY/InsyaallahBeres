@@ -12,14 +12,4 @@ class DashboardController extends Controller
         $role = $user->namaRole();
         return view($role . '.dashboard.index');
     }
-    public function dashboardopareator(){
-        return view('kaur_tataUsaha.dashboard');
-    }
-    public function dashboardKades(){
-        return view('operator.dasboard_penduduk.index');
-    }
-    public function pengajuan_surat(){
-        return view('warga.jenis_surat.index');
-    }
-
 }

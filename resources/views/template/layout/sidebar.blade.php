@@ -29,6 +29,12 @@
                 <span class="menu-title">Desa</span>
             </a>
         </li> 
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('admin.surat.index')}}">
+                <i class="icon-columns menu-icon"></i>
+                <span class="menu-title">Surat</span>
+            </a>
+        </li> 
         @endcan
     </ul>
 </nav>
