@@ -254,9 +254,9 @@
     <script src="{{asset('assets/penduduk/js/dashboard.js')}}"></script>
     <script src="{{asset('assets/penduduk/js/Chart.roundedBarCharts.js')}}"></script>
     <!-- End custom js for this page-->
-    @stack('Script')
-@include('template.script.alert')
-@include('template.script.dataTable')
+    @include('template.script.dataTable')
+    @include('template.script.alert')
+    @stack('js')
 </body>
 
 </html>

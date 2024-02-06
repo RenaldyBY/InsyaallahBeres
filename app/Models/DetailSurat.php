@@ -10,6 +10,8 @@ class DetailSurat extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+    
     public function surat(): BelongsTo
     {
         return $this->belongsTo(Surat::class, 'surat_id');

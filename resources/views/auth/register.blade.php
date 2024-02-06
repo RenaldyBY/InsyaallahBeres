@@ -1,15 +1,9 @@
 <x-guest-layout>
     <form method="POST" action="{{ route('register') }}">
         @csrf
- <!-- Name -->
- <div>
-    <x-input-label for="nik" :value="__('NIK')" />
-    <x-text-input id="name" class="block mt-1 w-full" type="text" name="nik" :value="old('nik')" required autofocus autocomplete="nik" />
-    <x-input-error :messages="$errors->get('nik')" class="mt-2" />
-</div>
-        <!-- Name -->
+        <!-- NIK -->
         <div>
-            <x-input-label for="name" :value="__('Name')" />
+            <x-input-label for="name" :value="__('NIK')" />
             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>

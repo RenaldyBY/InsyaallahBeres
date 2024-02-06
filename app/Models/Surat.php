@@ -10,6 +10,8 @@ class Surat extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function detailSurat(): HasMany
     {
         return $this->hasMany(DetailSurat::class, 'surat_id');
