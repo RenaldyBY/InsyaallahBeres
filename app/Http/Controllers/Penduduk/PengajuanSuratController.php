@@ -12,6 +12,7 @@ use App\Models\PengajuanSuratDetail;
 use App\Models\Desa;
 use Auth;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use PDF;
 
 class PengajuanSuratController extends Controller
 {
@@ -27,8 +28,8 @@ class PengajuanSuratController extends Controller
         return view('penduduk.pengajuanSurat.pilihSurat')->with($data);
     }
 
-    public function create($surat)
-    {   
+    public function create(String $surat)
+    {
         $data['surat'] = Surat::where('id', $surat)->first();
         $data['penduduk'] = Penduduk::where('id', Auth::user()->penduduk_id)->first();
         $data['detailSurats'] = DetailSurat::where('surat_id',  $surat)->get();
@@ -70,11 +71,20 @@ class PengajuanSuratController extends Controller
         return redirect()->route('penduduk.pengajuanSurat.index')->with('success', 'Pengajuan Surat Berhasil');
     }
 
-    public function show($surat)
+    public function show(String $surat)
     {
         $data['pengajuanSurat'] = PengajuanSurat::where('no_surat', $surat)->first();
         $data['desa'] = Desa::first();
 
         return view('penduduk.pengajuanSurat.show')->with($data);
+    }
+
+    public function cetak(String $surat)
+    {
+    	$pengajuanSurat = PengajuanSurat::where('no_surat', $surat)->first();
+        $desa = Desa::first();
+
+    	$pdf = PDF::loadview('penduduk.pengajuanSurat.print',['pengajuanSurat' => $pengajuanSurat , 'desa' => $desa]);
+    	return $pdf->download('surat_' . $pengajuanSurat->surat->nama_surat . '_' . $pengajuanSurat->penduduk->nama . '.pdf');
     }
 }

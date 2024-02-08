@@ -22,10 +22,16 @@
                     <td>{{ $pengajuanSurat->tanggal_pengajuan }}</td>
                     @if ($pengajuanSurat->status == 1)
                         <td><span class="badge badge-success">Terverivikasi</span></td>
-                    @else
+                    @elseif($pengajuanSurat->status == 0)
                         <td><span class="badge badge-warning">Belum Terverivikasi</span></td>
+                    @else
+                    <td><span class="badge badge-danger">Ditolak</span></td>
                     @endif
-                    <td><a href="{{route('penduduk.pengajuanSurat.show', $pengajuanSurat->no_surat)}}" target="_blank" class="btn btn-info" rel="noopener noreferrer">Lihat</a>
+                    <td>
+                        <a href="{{route('penduduk.pengajuanSurat.show', $pengajuanSurat->no_surat)}}" target="_blank" class="btn btn-info" rel="noopener noreferrer">Lihat</a>
+                        @if ($pengajuanSurat->status == 1)
+                        <a href="{{route('penduduk.pengajuanSurat.cetak', $pengajuanSurat->no_surat)}}" target="_blank" class="btn btn-primary" rel="noopener noreferrer">PDF</a>
+                        @endif
                     </td>
                 </tr>
             @endforeach

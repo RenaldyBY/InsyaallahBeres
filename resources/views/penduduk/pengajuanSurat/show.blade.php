@@ -248,7 +248,7 @@
                                 <div class="surat-header-body-line4">Alamat {{$desa->alamat}} e-mail: {{$desa->email}} kontak: {{$desa->kontak}}</div>
                             </div>
                             <div class="surat-header-qrcode">
-                                {!! QrCode::size(75)->generate(route('surat.show', $pengajuanSurat->no_surat)); !!} 
+                                {!! QrCode::size(75)->generate(route('surat.show', $pengajuanSurat->no_surat)); !!}
                             </div>
                         </div>
                         <!-- header -->
@@ -291,7 +291,7 @@
                                         @if ($pengajuanSurat->penduduk->jk == 1)
                                         <td>Laki-laki</td>
                                         @else
-                                        <td>Perempuan</td>    
+                                        <td>Perempuan</td>
                                         @endif
                                     </tr>
                                     <tr>
@@ -365,9 +365,11 @@
                             </table>
                         </div>
                         @if ($pengajuanSurat->status == 1)
-                        <p>Berlaku sampai dengan tanggal : {{$pengajuanSurat->tanggal_expired}}</p>     
+                        <p>Berlaku sampai dengan tanggal : {{$pengajuanSurat->tanggal_expired}}</p>
+                        @elseif($pengajuanSurat->status == 0)
+                        <p>Berlaku sampai dengan tanggal : <span style="color: yellow;"> Belum diverivikasi </span></p>
                         @else
-                        <p>Berlaku sampai dengan tanggal : Belum diverivikasi</p>
+                        <p>Berlaku sampai dengan tanggal : <span style="color: red;"> Surat tidak terverivikasi </span></p>
                         @endif
                         <p>Demikian surat keterangan ini dibuat dan di berikan kepada yang bersangkutan untuk digunakan
                             sebagai mestinya</p>
@@ -377,12 +379,16 @@
                         <div class="surat-foot-ttd">
                             <div class="surat-foot-ttd-line1"></div>{{$desa->nama_desa. ', ' . date('d-M-Y')}}
                             <div class="surat-foot-ttd-line2">Kepala Desa {{$desa->nama_desa}}</div>
+                            @if ($pengajuanSurat->ttd == true)
+                            <div class="surat-foot-ttd-line3"><img src="{{url('storage/img/ttd/',$desa->ttd)}}" width="120px" height="80px" alt="" srcset=""></div>
+                            @else
                             <div class="surat-foot-ttd-line3"></div>
+                            @endif
                             <div class="surat-foot-ttd-line4">{{$desa->nama_kepala_desa}}</div>
                             <div class="surat-foot-ttd-line5">NIP. {{$desa->nip}}</div>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>

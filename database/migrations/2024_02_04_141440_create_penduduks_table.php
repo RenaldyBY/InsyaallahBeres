@@ -23,14 +23,14 @@ return new class extends Migration
             $table->string('rt');
             $table->string('rw');
             $table->string('agama');
-            $table->string('status_perkawinan');
-            $table->string('pekerjaan');
+            $table->string('status_perkawinan')->nullable();
+            $table->string('pekerjaan')->nullable();
             $table->string('pendidikan');
-            $table->string('kewarganegaraan');
+            $table->string('kewarganegaraan')->nullable();
             $table->bigInteger('desa_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('desa_id')->references('id')->on('desas');
+            $table->foreign('desa_id')->references('id')->on('desas')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

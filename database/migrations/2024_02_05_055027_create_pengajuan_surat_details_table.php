@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('isi_kolom')->nullable();
             $table->timestamps();
 
-            $table->foreign('no_surat')->references('no_surat')->on('pengajuan_surats');
+            $table->foreign('no_surat')->references('no_surat')->on('pengajuan_surats')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

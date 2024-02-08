@@ -54,13 +54,11 @@
                                         @endif
                                     </td>
                                     <td>
-                                       <a class="btn btn-primary" href="/warga/Pengajuan_surat_domisili/print/{{$domisili->id}}">Print
+                                        <a class="btn btn-primary" href="/warga/Pengajuan_surat_domisili/print/{{$domisili->id}}">Print
                                         <i class="ti-printer btn-icon-append"></i></a>
                                         <a class="btn btn-danger" href="/warga/Pengajuan_surat_domisili/hapus/{{$domisili->id}} "   data-confirm-delete="true">  Delete
                                             <i class="ti-trash btn-icon-append"></i></a>
-
                                     </td>
-
                                 </tr>
                                 @endforeach
                             </tbody>

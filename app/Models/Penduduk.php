@@ -11,6 +11,8 @@ class Penduduk extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function user(): HasOne
     {
         return $this->hasOne(User::class, 'penduduk_id');

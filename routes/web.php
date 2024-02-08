@@ -11,6 +11,7 @@ use App\Http\Controllers\Guest\SuratController;
 use App\Http\Controllers\Kades\PersetujuanSuratController;
 use App\Http\Controllers\Admin\PengaturanDesaController;
 use App\Http\Controllers\Admin\PengaturanSuratController;
+use App\Http\Controllers\Admin\KelolaPendudukController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,7 @@ Route::middleware('auth')->group(function () {
                     Route::get('/pengajuan-surat/create/{surat}', 'create')->name('pengajuanSurat.create');
                     Route::post('/pengajuan-surat/store', 'store')->name('pengajuanSurat.store');
                     Route::get('/pengajuan-surat/show/{surat}', 'show')->name('pengajuanSurat.show');
+                    Route::get('/pengajuan-surat/cetak/{surat}', 'cetak')->name('pengajuanSurat.cetak');
                 });
             });
         });
@@ -54,6 +56,7 @@ Route::middleware('auth')->group(function () {
                 Route::controller(PersetujuanSuratController::class)->group(function () {
                     Route::get('/persetujuan-surat', 'index')->name('persetujuanSurat.index');
                     Route::patch('/persetujuan-surat/setujui', 'setujui')->name('persetujuanSurat.setujui');
+                    Route::patch('/persetujuan-surat/tolak', 'tolak')->name('persetujuanSurat.tolak');
                 });
             });
         });
@@ -73,6 +76,15 @@ Route::middleware('auth')->group(function () {
                     Route::get('/surat/{surat}', 'show')->name('surat.show');
                     Route::post('/surat/kolomSurat', 'storeKolom')->name('surat.kolom.store');
                     Route::delete('/surat/kolomSurat/{id}', 'destroyKolom')->name('surat.kolom.destroy');
+                });
+                Route::controller(KelolaPendudukController::class)->group(function () {
+                    Route::get('/penduduk', 'index')->name('penduduk.index');
+                    Route::get('/penduduk/create', 'create')->name('penduduk.create');
+                    Route::post('/penduduk/store', 'store')->name('penduduk.store');
+                    Route::get('/penduduk/{penduduk}/edit', 'edit')->name('penduduk.edit');
+                    Route::put('/penduduk/{penduduk}', 'update')->name('penduduk.update');
+                    Route::get('/penduduk/{penduduk}', 'show')->name('penduduk.show');
+                    Route::delete('/penduduk/{penduduk}', 'destroy')->name('penduduk.destroy');
                 });
             });
         });

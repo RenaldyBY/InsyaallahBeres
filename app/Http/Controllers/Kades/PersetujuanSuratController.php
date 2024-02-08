@@ -36,4 +36,20 @@ class PersetujuanSuratController extends Controller
         }
         return redirect()->back()->with('success', 'Berhasil menyetujui surat');
     }
+
+    public function tolak(Request $request)
+    {
+        // dd($surat);
+        $surat = $request->no_surat;
+        try {
+            $pengajuanSurat = PengajuanSurat::where('no_surat', $surat)->first();
+            $pengajuanSurat->update([
+                    'status' => 2,
+                ]);
+        } catch (\Throwable $th) {
+            dd($th->getMessage());
+            return redirect()->back()->withErrors($th->getMessage());
+        }
+        return redirect()->back()->with('success', 'Berhasil menolak surat');
+    }
 }

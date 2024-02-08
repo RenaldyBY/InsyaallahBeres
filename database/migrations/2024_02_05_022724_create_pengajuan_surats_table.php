@@ -21,8 +21,8 @@ return new class extends Migration
             $table->timestamps();
 
             $table->primary('no_surat');
-            $table->foreign('surat_id')->references('id')->on('surats');
-            $table->foreign('penduduk_id')->references('id')->on('penduduks');
+            $table->foreign('surat_id')->references('id')->on('surats')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('penduduk_id')->references('id')->on('penduduks')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

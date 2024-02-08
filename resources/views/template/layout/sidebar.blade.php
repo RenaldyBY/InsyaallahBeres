@@ -13,14 +13,14 @@
                 <span class="menu-title">Pengajuan Surat</span>
             </a>
         </li>
-        @endcan  
+        @endcan
         @can('kades')
         <li class="nav-item">
             <a class="nav-link" href="{{route('kades.persetujuanSurat.index')}}">
                 <i class="icon-columns menu-icon"></i>
                 <span class="menu-title">Persetujuan Surat</span>
             </a>
-        </li>  
+        </li>
         @endcan
         @can('admin')
         <li class="nav-item">
@@ -28,13 +28,19 @@
                 <i class="icon-columns menu-icon"></i>
                 <span class="menu-title">Desa</span>
             </a>
-        </li> 
+        </li>
         <li class="nav-item">
             <a class="nav-link" href="{{route('admin.surat.index')}}">
                 <i class="icon-columns menu-icon"></i>
                 <span class="menu-title">Surat</span>
             </a>
-        </li> 
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('admin.penduduk.index')}}">
+                <i class="icon-columns menu-icon"></i>
+                <span class="menu-title">Penduduk</span>
+            </a>
+        </li>
         @endcan
     </ul>
 </nav>

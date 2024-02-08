@@ -21,8 +21,10 @@
                     <td>{{ $pengajuanSurat->penduduk->nama }}</td>
                     @if ($pengajuanSurat->status == 1)
                         <td><span class="badge badge-success">Terverivikasi</span></td>
-                    @else
+                    @elseif($pengajuanSurat->status == 0)
                         <td><span class="badge badge-warning">Belum Terverivikasi</span></td>
+                    @else
+                    <td><span class="badge badge-danger">Ditolak</span></td>
                     @endif
                     <td>
                         <a href="{{route('surat.show', $pengajuanSurat->no_surat)}}" target="_blank" class="btn btn-info" rel="noopener noreferrer">Lihat</a>
@@ -32,6 +34,12 @@
                             @csrf
                             <input type="hidden" name="no_surat" value="{{$pengajuanSurat->no_surat}}">
                             <button type="button" class="btn btn-success" onclick="formConfirmation('Setujui surat {{$pengajuanSurat->surat->nama_surat}} ini?')">Setujui</button>
+                        </form>
+                        <form action="{{route('kades.persetujuanSurat.tolak')}}" method="post">
+                            @method('patch')
+                            @csrf
+                            <input type="hidden" name="no_surat" value="{{$pengajuanSurat->no_surat}}">
+                            <button type="button" class="btn btn-danger" onclick="formConfirmation('Tolak surat {{$pengajuanSurat->surat->nama_surat}} ini?')">Tolak</button>
                         </form>
                         @endif
                     </td>
