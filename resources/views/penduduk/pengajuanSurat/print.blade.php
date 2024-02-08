@@ -7,6 +7,9 @@
     <title>Document</title>
 
     <style>
+        .container {
+            width: 50%;
+        }
         .upper {
             text-transform: uppercase;
         }
@@ -227,7 +230,7 @@
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="card card-modif">
                 <div class="card-body card-body-modif">
@@ -378,7 +381,7 @@
                             <div class="surat-foot-ttd-line1"></div>{{$desa->nama_desa. ', ' . date('d-M-Y')}}
                             <div class="surat-foot-ttd-line2">Kepala Desa {{$desa->nama_desa}}</div>
                             @if ($pengajuanSurat->ttd == true)
-                            <div class="surat-foot-ttd-line3"><img src="{{public_path('storage/img/ttd/',$desa->ttd)}}" width="120px" height="80px" alt="" srcset=""></div>
+                            <div class="surat-foot-ttd-line3"><img src="{{public_path('storage/img/ttd/'.$desa->ttd)}}" width="120px" height="80px" alt="" srcset=""></div>
                             @else
                             <div class="surat-foot-ttd-line3"></div>
                             @endif
@@ -390,6 +393,7 @@
                 </div>
             </div>
         </div>
+    </div>
 </body>
 
 </html>
